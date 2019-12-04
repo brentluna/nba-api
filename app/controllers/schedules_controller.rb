@@ -6,3 +6,4 @@ class SchedulesController < ApplicationController
 
   private
 end
+

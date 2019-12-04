@@ -14,10 +14,8 @@ class ScheduleService
 
   def parse_request(request)
     req_json = JSON.parse(request)
-
-    puts month_array
-
-    month_array
+    month_array = group_by_month(req_json)
+    formatted_games = format_games(month_array)
   end
 
   def group_by_month(schedule)
@@ -28,10 +26,8 @@ class ScheduleService
 
   def format_games(schedule)
     schedule.map do |month|
-      games = month['games']
-      month['games'] = games.map { |game| }
+      games = month[:games]
+      month[:games] = games.map { |game| Game.new(game) }
     end
   end
-
-  def format_game(game); end
 end
