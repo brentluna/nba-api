@@ -20,19 +20,36 @@ class ScheduleService
   end
 
   def group_by_month(schedule)
-    schedule['lscd'].map do |el|
-      { month: el['mscd']['mon'], games: el['mscd']['g'] }
+    # schedule['lscd'].map do |el|
+    #   { month: el['mscd']['mon'], games: el['mscd']['g'] }
+    # end
+
+    schedule['lscd'].reduce([]) do |res, el|
+      # { month: el['mscd']['mon'], games: el['mscd']['g'] }
+      res.concat(el['mscd']['g'])
     end
   end
 
-  def format_games(schedule)
-    schedule.map do |month|
-      games = month[:games]
-      month[:games] =
-        games.map do |game|
-          game = Game.new(game)
-          GameSerializer.new(game).serialized_json
-        end
+  def format_games(games)
+    # schedule.map do |month|
+    #   games = month[:games]
+    #   month[:games] =
+    games.map do |game|
+      game = Game.new(game)
+      # GameSerializer.new(game).serialized_json
+      GameSerializer.new(game).serializable_hash
     end
+    # end
   end
+  # def format_games(schedule)
+  #   schedule.map do |month|
+  #     games = month[:games]
+  #     month[:games] =
+  #       games.map do |game|
+  #         game = Game.new(game)
+  #         # GameSerializer.new(game).serialized_json
+  #         GameSerializer.new(game).serializable_hash
+  #       end
+  #   end
+  # end
 end

@@ -11,7 +11,8 @@ class Game
   end
 
   def home_team_json
-    TeamSerializer.new(home_team).serialized_json
+    # TeamSerializer.new(home_team).serialized_json
+    TeamSerializer.new(home_team).serializable_hash
   end
 
   def away_team
@@ -19,7 +20,8 @@ class Game
   end
 
   def away_team_json
-    TeamSerializer.new(away_team).serialized_json
+    # TeamSerializer.new(away_team).serialized_json
+    TeamSerializer.new(away_team).serializable_hash
   end
 
   def home_team_name

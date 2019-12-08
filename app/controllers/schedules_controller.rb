@@ -1,9 +1,8 @@
 class SchedulesController < ApplicationController
   def index
     schedule = ScheduleService.new.schedule
-    render json: { blah: 'hi', schedule: schedule }
+    render json: schedule
   end
 
   private
 end
-
